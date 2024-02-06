@@ -1,4 +1,4 @@
-import { Client, Databases} from 'appwrite';
+import { Client, Databases } from 'appwrite';
 import conf from "./conf/conf"
 
 
@@ -10,4 +10,4 @@ client
 
 export const databases = new Databases(client);
 
-    export default client;
+export default client;

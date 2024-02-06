@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { databases } from "../Appwrite.config";
+import client, { databases } from "../Appwrite.config";
 import conf from "../conf/conf";
 import { ID, Query } from "appwrite";
 import { Trash2 } from "react-feather"
@@ -10,6 +10,27 @@ const Room = () => {
 
     useEffect(() => {
         getMessages()
+
+
+        const unsubscribe = client.subscribe(`databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteCollectionId}.documents`, response => {
+            // Callback will be executed on changes for documents A and all files.
+            // console.log("Real time: ",response);
+
+            if (response.events.includes("databases.*.collections.*.documents.*.create")) {
+                console.log("Message is Created");
+                setMessages(prevState => [response.payload, ...prevState])
+
+            }
+            if (response.events.includes("databases.*.collections.*.documents.*.delete")) {
+                console.log("Message was deleted!!");
+                setMessages(prevSate => prevSate.filter(message => message.$id !== response.payload.$id))
+            }
+        });
+
+        return() =>{
+            unsubscribe()
+        }
+
     }, [])
 
     const handleSubmit = async (e) => {
@@ -25,9 +46,9 @@ const Room = () => {
             ID.unique(),
             payload,
         )
-        console.log("created", response);
+        // console.log("created", response);
 
-        setMessages(prevSate => [response, ...messages])
+        // setMessages(prevState => [response, ...prevState])
 
         setMessageBody("")
     }
@@ -41,13 +62,13 @@ const Room = () => {
                 Query.limit(20)
             ]
         )
-        console.log("Response: ", response);
+        // console.log("Response: ", response);
         setMessages(response.documents)
     }
 
     const deleteMessage = async (message_id) => {
         databases.deleteDocument(conf.appwriteDatabaseId, conf.appwriteCollectionId, message_id);
-        setMessages(prevSate => messages.filter(message => message.$id !== message_id))
+        // setMessages(prevSate => messages.filter(message => message.$id !== message_id))
     }
     return (
         <main className="container">
