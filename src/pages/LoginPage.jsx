@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
 
-    const { user } = useAuth()
+    const { user, handleUserLogin } = useAuth()
     const navigate = useNavigate()
     const [credentials, setCredentials] = useState({
         email: '',
@@ -20,14 +20,15 @@ const LoginPage = () => {
     const handleInputChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
+
+        
         setCredentials({ ...credentials, [name]: value })
-        console.log(credentials);
     }
 
     return (
         <div className="auth--container">
             <div className="form--wrapper">
-                <form>
+                <form onSubmit={(e) => {handleUserLogin(e, credentials)}}>
                     <div className="field-wrapper">
                         <label>Email:</label>
                         <input
