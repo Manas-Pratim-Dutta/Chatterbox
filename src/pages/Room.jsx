@@ -3,6 +3,7 @@ import client, { databases } from "../Appwrite.config";
 import conf from "../conf/conf";
 import { ID, Query } from "appwrite";
 import { Trash2 } from "react-feather"
+import Header from "../components/Header";
 
 const Room = () => {
     const [messages, setMessages] = useState([])
@@ -27,7 +28,7 @@ const Room = () => {
             }
         });
 
-        return() =>{
+        return () => {
             unsubscribe()
         }
 
@@ -72,7 +73,7 @@ const Room = () => {
     }
     return (
         <main className="container">
-
+            <Header />
             <div className="room--container">
 
 
