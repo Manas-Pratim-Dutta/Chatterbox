@@ -37,7 +37,7 @@ const LoginPage = () => {
                             name="email"
                             placeholder="Enter Your Email..."
                             value={credentials.email}
-                            onChange={handleInputChange}
+                            onChange={(e) => {handleInputChange(e)}}
                         />
                     </div>
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
                             name="password"
                             placeholder="Enter Your Password..."
                             value={credentials.password}
-                            onChange={handleInputChange}
+                            onChange={(e) => {handleInputChange(e)}}
                         />
                     </div>
                     <div className="field-wrapper">
