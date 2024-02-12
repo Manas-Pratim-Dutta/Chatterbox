@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { account } from "../Appwrite.config";
 import { useNavigate } from "react-router-dom";
+import { ID } from "appwrite";
 
 const AuthContext = createContext()
 
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     const getUserOnLoad = async () => {
         try {
             const accountDetails = await account.get();
-            console.log("acc:",accountDetails);
+            console.log("acc:", accountDetails);
             setUser(accountDetails)
         } catch (error) {
             console.error(error)
@@ -39,15 +40,42 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const handleUserLogout = async() => {
+    const handleUserLogout = async () => {
         await account.deleteSession('current')
         setUser(null)
     }
 
+    const handleUserRegister = async (e, credentials) => {
+        e.preventDefault()
+
+        if (credentials.password1 !== credentials.password2) {
+            alert('Password do not match');
+            return
+        }
+
+        try {
+            let response = await account.create(
+                ID.unique(),
+                credentials.email,
+                credentials.password1,
+                credentials.name
+            )
+
+            await account.createEmailSession(credentials.email,credentials.password1)
+            const accountDetails = await account.get();
+            console.log("acc:", accountDetails);
+            setUser(accountDetails)
+            navigate('/')
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
     const contextData = {
         user,
         handleUserLogin,
-        handleUserLogout
+        handleUserLogout,
+        handleUserRegister
 
 
     }

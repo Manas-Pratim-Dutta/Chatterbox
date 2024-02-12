@@ -5,6 +5,7 @@ import { AuthProvider } from './utils/AuthContext'
 
 import Room from './pages/Room'
 import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
 
         // So protecting the route, It will only pass it to child routes if user is authenticated
           <Route element={<PrivateRoutes />}>
