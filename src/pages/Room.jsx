@@ -14,7 +14,7 @@ const Room = () => {
     const [messageBody, setMessageBody] = useState('')
 
     useEffect(() => {
-        getMessages()
+        getMessages();
 
 
         const unsubscribe = client.subscribe(`databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteCollectionId}.documents`, response => {
@@ -75,7 +75,7 @@ const Room = () => {
                 Query.limit(20)
             ]
         )
-        // console.log("Response: ", response);
+        console.log("Response: ", response);
         setMessages(response.documents)
     }
 
@@ -122,17 +122,17 @@ const Room = () => {
                                     <small className="message-timestamp">{new Date(message.$createdAt).toLocaleString()}</small>
                                 </p>
 
-                                {/* {message.$permission.includes(`delete(\"user:${user.$id}\")`) && (
+                                {message.$permissions.includes(`delete(\"user:${user.$id}\")`) && (
 
                                     <Trash2
                                         className="delete--btn"
                                         onClick={() => { deleteMessage(message.$id) }}
                                     />
-                                )} */}
-                                 <Trash2
+                                )}
+                                 {/* <Trash2
                                         className="delete--btn"
                                         onClick={() => { deleteMessage(message.$id) }}
-                                    />
+                                    /> */}
 
 
                             </div>
