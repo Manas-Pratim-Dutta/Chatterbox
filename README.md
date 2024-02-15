@@ -1,8 +1,18 @@
-# React + Vite
+# Chatterbox - Realtime Chat App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chatterbox is a Realtime chat application built using React, CSS, React Router DOM, and Appwrite. It allows users to register, login, create chat rooms, send messages, and delete their own messages.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Users can register themselves and login securely.
+- **Create Chat Rooms**: Users can create chat rooms to engage in conversations with others.
+- **Realtime Messaging**: Messages are sent and received in real-time, providing a seamless chatting experience.
+- **Message Management**: Users can create messages and delete their own messages only.
+- **Responsive Design**: The application is designed to be responsive and work across different devices.
+
+## Tech Stack
+
+- React
+- CSS
+- React 
+- Appwrite
