@@ -22,5 +22,5 @@ Chatterbox is a Realtime chat application built using React, CSS, React Router D
 - Appwrite
 
 **Hosting**:
-- Vercel **<kbd>[Live](https://chatterbox-32o55s9zf-manas-pratim-duttas-projects.vercel.app/login)**
+- Vercel **<kbd>[Live](https://chatterbox-olive.vercel.app/)**
 
